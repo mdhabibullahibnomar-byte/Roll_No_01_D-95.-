@@ -1,16 +1,10 @@
-
 import { useState } from 'react'
-
 function App() {
   const [tasks, setTasks] = useState([])
   const [task, setTask] = useState('')
-
-  // Add task
   const addTask = (e) => {
     e.preventDefault()
-
     if (task.trim() === '') return
-
     setTasks([
       ...tasks,
       {
@@ -19,11 +13,8 @@ function App() {
         completed: false,
       },
     ])
-
     setTask('')
   }
-
-  // Complete or incomplete task
   const toggleTask = (id) => {
     setTasks(
       tasks.map((item) =>
@@ -33,25 +24,18 @@ function App() {
       )
     )
   }
-
-  // Delete task
   const deleteTask = (id) => {
     setTasks(tasks.filter((item) => item.id !== id))
   }
-
-  // Count remaining tasks
   const remaining = tasks.filter(
     (item) => !item.completed
   ).length
-
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-lg">
-
         <h1 className="mb-6 text-center text-3xl font-bold text-indigo-600">
           My Todo List
         </h1>
-
         <form onSubmit={addTask} className="mb-6 flex gap-2">
           <input
             type="text"
@@ -60,7 +44,6 @@ function App() {
             placeholder="Enter a new task..."
             className="min-w-0 flex-1 rounded-lg border p-3 outline-none focus:border-indigo-500"
           />
-
           <button
             type="submit"
             className="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
@@ -68,11 +51,9 @@ function App() {
             Add
           </button>
         </form>
-
         <p className="mb-4 font-semibold text-gray-600">
           Remaining Tasks: {remaining}
         </p>
-
         <ul className="space-y-3">
           {tasks.map((item) => (
             <li
@@ -85,7 +66,6 @@ function App() {
                 onChange={() => toggleTask(item.id)}
                 className="h-5 w-5 accent-indigo-600"
               />
-
               <span
                 className={`min-w-0 flex-1 break-words ${
                   item.completed
@@ -95,7 +75,6 @@ function App() {
               >
                 {item.text}
               </span>
-
               <button
                 onClick={() => deleteTask(item.id)}
                 className="rounded px-2 py-1 text-red-600 hover:bg-red-100"
@@ -116,5 +95,4 @@ function App() {
     </div>
   )
 }
-
 export default App
